@@ -29,9 +29,8 @@
     - name: Start the container
       docker_container:
         name: myapp
-        image: "mukesh92/myapp:{{DOCKER_TAG}}"
+        image: "mukesh92/myfoodies:{{DOCKER_TAG}}"
         state: started
-        pull: true
         published_ports:
           - 0.0.0.0:8080:8080
 
