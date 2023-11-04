@@ -35,7 +35,7 @@ pipeline {
         stage('Deployk8s'){
             steps{
                 script{
-                    kubernetesDeploy (configs: 'speedk8s.yml', kubeconfigId: 'k8scfg')
+                    kubernetesDeploy (configs: 'foodies.yml', kubeconfigId: 'k8scfg')
                     
                 }
             }
