@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: foodies
+  labels:
+    app: foodies
+spec:
+  selector:
+    matchLabels:
+      app: foodies
+  replicas: 1
+
+  template:
+    metadata:
+     name: foodies
+     labels:
+      app: foodies
+    spec:
+     containers:
+      - name: foodies
+        image: mukesh92/foodies:${BUILD_NUMBER}
+        ports:
+          - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: foodies-svc
+spec:
+ selector:
+   app: foodies
+ ports:
+   - protocol: "TCP"
+     port: 8080
+     targetPort: 8080
+     nodePort: 31081
+ type: NodePort
