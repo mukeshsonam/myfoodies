@@ -147,7 +147,7 @@
                             About
                         </span>
                         <h2>
-                            Welcome to ALIGARH RESTRO..........
+                            Welcome to ALIGARH RESTRO.............
                         </h2>
                     </div>
                     <div class="pl-lg-5 ml-md-5">
