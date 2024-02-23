@@ -147,7 +147,7 @@
                             About
                         </span>
                         <h2>
-                            Welcome to MUKESH RESTRO ALIGARH .........
+                            Welcome to SONAM RESTRO AGRA
                         </h2>
                     </div>
                     <div class="pl-lg-5 ml-md-5">
