@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('chekout') {
             steps {
-                git branch: 'main', url: 'https://github.com/mukeshsonam/foodies.git'
+                git branch: 'main', url: 'https://github.com/mukeshsonam/myfoodies.git'
             }
         }
         
@@ -23,21 +23,22 @@ pipeline {
             steps {
              sh "docker build -t mukesh92/foodies:${BUILD_NUMBER} ."
             }
-        }    
+        }  
+        
         stage('docker_push') {
             steps {
-                withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dokcerhubpwd')]) {
-                sh "docker login -umukesh92 -p ${dokcerhubpwd}"
-                }
-                sh "docker push mukesh92/foodies:${BUILD_NUMBER}"
-            }
+              withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/'){
+              sh "docker push mukesh92/foodies:${BUILD_NUMBER}"
+              }
+           }
         }
+        
         stage('Deployk8s'){
             steps{
-                script{
-                    kubernetesDeploy (configs: 'foodies.yml', kubeconfigId: 'k8scfg')
-                    
-                }
+            withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8stoken', namespace: 'jenkins', restrictKubeConfigAccess: false, serverUrl: 'https://172.31.40.170:6443') {
+            sh "kubectl apply -f foodies.yml"
+            sh 'kubectl set image deployments/foodies foodies=mukesh92/foodies:${BUILD_NUMBER}'
+              }
             }
         }
     }
