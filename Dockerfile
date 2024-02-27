@@ -20,4 +20,4 @@ COPY run.sh /tmp
 RUN chmod u+x /tmp/run.sh
 RUN chmod u+x ${TOMCAT_HOME}/bin/startup.sh
 
-ENTRYPOINT ["/tmp/run.sh"] 
+ENTRYPOINT ["/tmp/run.sh", "echo","your deployment good"] 
