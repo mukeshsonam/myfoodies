@@ -22,6 +22,7 @@ pipeline {
         stage('docker_build') {
             steps {
              sh "docker build -t mukesh92/foodies:${BUILD_NUMBER} ."
+             sh "echo "your docker file build successfully""
             }
         }  
         
